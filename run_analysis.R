@@ -1,5 +1,5 @@
 
-
+# merge the test and train data sets into one set
 merge_table = function(test,train) {
   test <- read.table(test)
   train <- read.table(train)
@@ -9,7 +9,7 @@ merge_table = function(test,train) {
 
 
 merge_tables = function() {
-  
+  # merge the test and train data with x,y and subject
   test.x <- "./data/UCI HAR Dataset/test/X_test.txt"
   test.y <- "./data/UCI HAR Dataset/test/y_test.txt"
   test.subject <- "./data/UCI HAR Dataset/test/subject_test.txt"
@@ -24,6 +24,7 @@ merge_tables = function() {
 }
 
 extracted.mean_std = function(dataset) {
+  # extract the mean and std features 
   features.path <- "./data/UCI HAR Dataset/features.txt"
   features <- read.table(features.path)
   means <- sapply(features[,2], function(x) grepl("mean", x, fixed=T))
@@ -35,13 +36,15 @@ extracted.mean_std = function(dataset) {
 }
 
 name.activities=function(dataset){
+  # get the activities data
   activities.path <- "./data/UCI HAR Dataset/activity_labels.txt"
   activities<- read.table(activities.path)
   dataset<-merge(dataset, activities, by= intersect(names(dataset), names(activities)))
   colnames(dataset)<-c("activity_id","activity_name")
   dataset
 }
-  
+ 
+# the main method that tidy the data 
 clean_data<-function(){
 
 
