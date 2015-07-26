@@ -20,8 +20,8 @@ From the data set in step 4, creates a second, independent tidy data set with th
 Good luck!
 
 ##Steps
-1. create a directory in your workspace of R environment named data
-2. unzip the  Samsung data into data directory.
+1. create a directory in your workspace of R environment named "data"
+2. unzip the  Samsung data into "data" directory.
 3. download the run_analysis.R in to R environment and source it.
 4. if there is no plyr and Hmisc packages ,using install.packages to install              and library them.
-5. running clean_data() method on console, it will create a tidy_data.txt in the R working space.
+5. running clean_data() method on console, it will create a tidy_data.txt in the "data" directory.
