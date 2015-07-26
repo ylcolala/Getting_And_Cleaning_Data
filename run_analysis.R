@@ -26,8 +26,8 @@ merge_tables = function() {
 extracted.mean_std = function(dataset) {
   features.path <- "./data/UCI HAR Dataset/features.txt"
   features <- read.table(features.path)
-  means <- sapply(features[,2], function(x) grepl("mean()", x, fixed=T))
-  stds <- sapply(features[,2], function(x) grepl("std()", x, fixed=T))
+  means <- sapply(features[,2], function(x) grepl("mean", x, fixed=T))
+  stds <- sapply(features[,2], function(x) grepl("std", x, fixed=T))
   data.cols <- means|stds
   dataset<-dataset[,data.cols]
   colnames(dataset)<-features[data.cols,2]
@@ -51,11 +51,11 @@ clean_data<-function(){
   
   activities<-name.activities(tables$y);
   
-  colnames(tables$subject)<-"subject"
+  colnames(tables$subject)<-"subject_id"
   
-  tidy_data<-cbind(extracted, activities, tables$subject)
+  tidy_data<-cbind(tables$subject,activities,extracted )
   
-  tidy_data.average<- ddply(tidy_data,.(activity_id,subject), fun.aggregate=mean)
+  tidy_data.average<- ddply(tidy_data,.(activity_id,subject_id), fun.aggregate=mean)
 
   write.table(tidy_data.average, file="./data/tidy_data.txt", row.names = FALSE)
 }
