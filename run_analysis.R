@@ -55,7 +55,7 @@ clean_data<-function(){
   
   tidy_data<-cbind(tables$subject,activities,extracted )
   
-  tidy_data.average<- ddply(tidy_data,.(activity_id,subject_id), fun.aggregate=mean)
+  tidy_data.average<- ddply(tidy_data,.(subject_id,activity_id,activity_name), function(x) colMeans(x[4:82]))
 
   write.table(tidy_data.average, file="./data/tidy_data.txt", row.names = FALSE)
 }
